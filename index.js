@@ -1,14 +1,14 @@
 // crear título de empiece el juego  
-// Crear tablero propio y tablero enemigo
 
 function printHeading(text) {
   const pad = '='.repeat(text.length)
   console.log(`==========${pad}==========`)
   console.log(`========= ${text} =========`)
   console.log(`==========${pad}==========`)
-
+  
 }
 
+// Crear tablero propio y tablero enemigo
 var board =[
     [' ',' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
     [' ',' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
@@ -107,6 +107,7 @@ function printBoard(board) {
     }
     
     // Situar barcos en tablero propio y tablero enemigo aleatoriamente
+    
     function getRandomIntRow(max) {
       return Math.floor(Math.random() * max);
     }
@@ -120,6 +121,27 @@ function printBoard(board) {
         return "vertical"
       }
     }
+
+    // function getRandom(row,col,ori) {
+    //   var rows=Math.floor(Math.random() * row);
+    //   var cols=Math.floor(Math.random() * col);
+    //   if(Math.floor(Math.random() * ori) === 0) {
+    //     return rows, cols, "horizontal"
+    //   } else {
+      //     return rows, cols, "vertical"
+      //   }
+      // }
+      // console.log(insertShips(board, aircraftCarrier, getRandom(9,9,2)));
+      
+    // Crear disparar
+    function shoot(board,x,y) {
+    if (board[x][y] == " ") {
+      board[x][y]="💧"    
+    } else {
+      board[x][y]="🔥"
+      }
+    }
+
     console.log(insertShips(board, aircraftCarrier, getRandomIntRow(9), getRandomIntCol(9), getRandomIntOri(2)));
     console.log(insertShips(board, vessel, getRandomIntRow(9), getRandomIntCol(9), getRandomIntOri(2)));
     console.log(insertShips(board, submarine, getRandomIntRow(9), getRandomIntCol(9), getRandomIntOri(2)));
@@ -131,22 +153,21 @@ function printBoard(board) {
     console.log(insertShips(board2, submarine, getRandomIntRow(9), getRandomIntCol(9), getRandomIntOri(2)));
     console.log(insertShips(board2, cruise, getRandomIntRow(9), getRandomIntCol(9), getRandomIntOri(2)));
     console.log(insertShips(board2, boat, getRandomIntRow(9), getRandomIntCol(9), getRandomIntOri(2)));
+    ///*****buscar opción para no introducir las lineas de insertar  */
+   
+printHeading("The Battleship simulator starts")
+printBoard(board);
+printBoard(board2); 
 
-   printHeading("The Battleship simulator starts")
-    
-   printBoard(board);
-   printBoard(board2);
+shoot(board, 4,3)
+printBoard(board);
 
-    
-// Crear disparar
-  function shooting (row, col) {
-    board[]
-  }
 
-// crear casillas
-// Crear ocultar casillas
-// Crear colocar barcos 
-// Definir límites colocación barcos
+// Crear ocultar tablero j1 
+
+//(DANIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII)
+      //coger tablero1 
+      
 // Definir no superposición barcos
 // ------- empieza el juego
 // inicializar rondas y establecer límite
