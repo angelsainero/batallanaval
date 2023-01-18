@@ -145,47 +145,49 @@ function printBoard(board) {
   // Crear ocultar tablero j1 
   //(DANIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII)
         //duplicamos tablero
+  console.log("Copia oculta del tablero 1")
   function hiddenboard(valor){
       return valor}
-  const board1hidden = board.map(hiddenboard)
-  console.log("Copia del tablero 1")
-  
-  
-  
+      const board1hidden = board.map(hiddenboard)
+      
+    
+      
+
   //EJECUCION:
   console.log(insertShips(board, aircraftCarrier, getRandomIntRow(9), getRandomIntCol(9), getRandomIntOri(2)));
   console.log(insertShips(board, vessel, getRandomIntRow(9), getRandomIntCol(9), getRandomIntOri(2)));
   console.log(insertShips(board, submarine, getRandomIntRow(9), getRandomIntCol(9), getRandomIntOri(2)));
   console.log(insertShips(board, cruise, getRandomIntRow(9), getRandomIntCol(9), getRandomIntOri(2)));
-    console.log(insertShips(board, boat, getRandomIntRow(9), getRandomIntCol(9), getRandomIntOri(2)));
-    
-    console.log(insertShips(board2, aircraftCarrier, getRandomIntRow(9), getRandomIntCol(9), getRandomIntOri(2)));
-    console.log(insertShips(board2, vessel, getRandomIntRow(9), getRandomIntCol(9), getRandomIntOri(2)));
-    console.log(insertShips(board2, submarine, getRandomIntRow(9), getRandomIntCol(9), getRandomIntOri(2)));
-    console.log(insertShips(board2, cruise, getRandomIntRow(9), getRandomIntCol(9), getRandomIntOri(2)));
-    console.log(insertShips(board2, boat, getRandomIntRow(9), getRandomIntCol(9), getRandomIntOri(2)));
-    ///*****buscar opción para no introducir las lineas de insertar  */
-    
-    //PINTAMOS TITULO
-    printHeading("The Battleship simulator starts")
-    //PINTAMOS TABLEROS
-    printBoard(board);
-    printBoard2(board2); 
-
-    //EJEMPLO DE DISPARO A TABLERO
-    shoot(board, 4,3)
-    printBoard(board);
-    
-    //TABLERO OCULTO 
-    console.log("Tablero oculto")
-   
+  console.log(insertShips(board, boat, getRandomIntRow(9), getRandomIntCol(9), getRandomIntOri(2)));
+  
+  console.log(insertShips(board2, aircraftCarrier, getRandomIntRow(9), getRandomIntCol(9), getRandomIntOri(2)));
+  console.log(insertShips(board2, vessel, getRandomIntRow(9), getRandomIntCol(9), getRandomIntOri(2)));
+  console.log(insertShips(board2, submarine, getRandomIntRow(9), getRandomIntCol(9), getRandomIntOri(2)));
+  console.log(insertShips(board2, cruise, getRandomIntRow(9), getRandomIntCol(9), getRandomIntOri(2)));
+  console.log(insertShips(board2, boat, getRandomIntRow(9), getRandomIntCol(9), getRandomIntOri(2)));
+  ///*****buscar opción para no introducir las lineas de insertar  */
+  
+  //PINTAMOS TITULO
+  printHeading("The Battleship simulator starts")
+  //PINTAMOS TABLEROS
+  console.log("Tablero1")
+  printBoard(board);
+  console.log("Tablero2")
+  printBoard2(board2); 
+  
+  //EJEMPLO DE DISPARO A TABLERO
+  shoot(board, 4,3)
+  printBoard(board);
+  
+  //PINTAMOS ARRAY TABLERO OCULTO 
+  console.log("Array Tablero oculto")
+  console.log(board1hidden)
+  
+  //PINTAMOS TABLERO OCULTO
+  console.log("Tablero Oculto")
+  console.log(printBoard(board1hidden))
   
   //añadir condicion para que si la casilla es barco se oculte pero si es agua o tocado permanezca
- 
-    
-      
-    
-    
 
 // Definir no superposición barcos
 // ------- empieza el juego
@@ -214,4 +216,5 @@ function printBoard(board) {
         // incrementar la ronda
 // ------- una vez terminado el juego
 // mostrar que ha terminado el juego diciendo cuántas rondas hemos necesitado
+
 
