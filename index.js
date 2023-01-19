@@ -89,7 +89,7 @@ function printHeading(text) {
 }
 
 function printBoard(board) {
-  console.log("Tablero JUGADOR A");
+  console.log("Tablero PROPIO");
   console.log(
     "┌─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┐"
   );
@@ -108,7 +108,7 @@ function printBoard(board) {
 }
 
 function printBoard2(board2) {
-  console.log("Tablero JUGADOR B");
+  console.log("Tablero OPONENTE");
   console.log(
     "┌─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┐"
   );
@@ -127,18 +127,42 @@ function printBoard2(board2) {
 }
 
 //funcion para insertar barcos  en el board (vertical y horizontal)
-function insertShips(board, ship, row, col, direction) {
-  // if (direction < 1 ) {
-
-  // }
-  for (let i = col; i < col + ship.size; i++) {
-    if (col + ship.size < board.length) {
-      board[row][i] = ship.icon;
-    } else {
-      board[row][i - 5] = ship.icon;
-    }
+function insertShips (board, ship, direction) {
+  if (direction==1){  //si es horizontal
+    let isValid = false;
+    while (!isValid){        
+      let startRow=Math.floor(Math.random() * 10);
+      let startCol=Math.floor(Math.random() * 10);
+      for (let i = startCol; i < startCol + ship.size; i++){               
+            if(startCol + ship.size < board.length && board[startRow][i]==" ") {             
+            board[startRow][i]=ship.icon;
+            isValid=true;
+            }else{
+              isValid=false;
+              break;
+            }
+      }
   }
-}
+  }else{  //si es vertical
+    let isValid = false;
+    while (!isValid){        
+      let startRow=Math.floor(Math.random() * 10);
+      let startCol=Math.floor(Math.random() * 10);
+      for (let i = startRow; i < startRow + ship.size; i++){               
+            if(startRow + ship.size < board.length && board[i][startCol]==" ") {             
+            board[i][startRow]=ship.icon;
+            isValid=true;
+            }else{
+              isValid=false;
+              break;
+            }
+      }
+  }
+
+    //   }
+    // }
+  }
+  }
 
 // //PINTAMOS TITULO
 printHeading("The Battleship simulator starts");
@@ -149,12 +173,28 @@ function getRandom(max) {
   return Math.floor(Math.random() * max);
 }
 
-insertShips(boardA, aircraftCarrier, getRandom(9), getRandom(9), "horizontal");
-insertShips(boardB, aircraftCarrier, getRandom(9), getRandom(9), "horizontal");
+insertShips(boardA, aircraftCarrier, getRandom(2));
+insertShips(boardA, vessel, getRandom(2));
+insertShips(boardA, submarine, getRandom(2));
+insertShips(boardA, submarine, getRandom(2));
+insertShips(boardA, cruise, getRandom(2));
+insertShips(boardA, cruise, getRandom(2));
+insertShips(boardA, cruise, getRandom(2));
+insertShips(boardA, boat, getRandom(2));
+insertShips(boardA, boat, getRandom(2));
+insertShips(boardA, boat, getRandom(2));
+insertShips(boardB, aircraftCarrier, getRandom(2));
+insertShips(boardB, vessel, getRandom(2));
+insertShips(boardB, submarine, getRandom(2));
+insertShips(boardB, submarine, getRandom(2));
+insertShips(boardB, cruise, getRandom(2));
+insertShips(boardB, cruise, getRandom(2));
+insertShips(boardB, cruise, getRandom(2));
+insertShips(boardB, boat, getRandom(2));
+insertShips(boardB, boat, getRandom(2));
+insertShips(boardB, boat, getRandom(2));
 
-insertShips(boardA, vessel, getRandom(9), getRandom(9), getRandom(1));
 
-insertShips(boardB, vessel, getRandom(9), getRandom(9), getRandom(1));
 
 printBoard(boardA);
 printBoard2(boardB);
@@ -202,7 +242,7 @@ function shoot(x, y) {
   }
 
   if (
-    (myTurn && shootCounterA > 99) || // si es mi turno y mi contador llega a 99
+    (myTurn && shootCounterA > 99) || // si mi turno y mi contador llega a 99
     (!myTurn && shootCounterB > 99)
   ) {
     // o si no es mi turno y su contador llega a 99
@@ -226,52 +266,3 @@ while (shootCounterA < 100 && shootCounterB < 100) {
   shoot(getRandom(9), getRandom(9));
 }
 
-// // Crear ocultar tablero j1
-// //(DANIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII)
-// //duplicamos tablero
-// console.log("Copia oculta del tablero 1");
-// function hiddenboard(valor) {
-//   return valor;
-// }
-// const board1hidden = board.map(hiddenboard);
-
-// //EJECUCION:
-
-///*****buscar opción para no introducir las lineas de insertar  */
-
-//EJEMPLO DE DISPARO A TABLERO
-// shoot(board, 4, 3);
-// printBoard(board);
-
-// //PINTAMOS ARRAY TABLERO OCULTO
-// console.log("Array Tablero oculto");
-// console.log(board1hidden);
-
-// //PINTAMOS TABLERO OCULTO
-// console.log("Tablero Oculto");
-// console.log(printBoard(board1hidden));
-
-//añadir condicion para que si la casilla es barco se oculte pero si es agua o tocado permanezca
-
-// Definir no superposición barcos
-// ------- empieza el juego
-// inicializar rondas y establecer límite
-// mientras no haya terminado el juego
-
-// mostrar la ronda en la que estamos
-// Jugador 1 realiza disparo en tablero enemigo
-// Mostrar las coordenadas de disparo
-// Disparo j1
-// Mostrar disparo en tablero J2
-// Cambiar de turno
-// jugador j2
-// Mostrar disparo en tablero J1
-
-// mostrar las cartas seleccionadas descubiertas en el tablero
-// si son la misma figura
-// mantenemos las cartas descubiertas
-// si no son la misma figura
-// volverlas a cubrir
-// incrementar la ronda
-// ------- una vez terminado el juego
-// mostrar que ha terminado el juego diciendo cuántas rondas hemos necesitado
