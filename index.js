@@ -242,18 +242,18 @@ function shoot(x, y) {
   }
 
   if (
-    (myTurn && shootCounterA > 99) || // si mi turno y mi contador llega a 99
-    (!myTurn && shootCounterB > 99)
+    (myTurn && shootCounterA > 99) || // si es mi turno y mi contador llega a 99
+    (!myTurn && shootCounterB > 99) // o si no es mi turno y su contador llega a 99
   ) {
-    // o si no es mi turno y su contador llega a 99
+    
     printHeading("GAME OVER");
   } else {
     if (board[x][y] == " ") {
-      boardCopy[x][y] = "💧";
+      boardCopy[x][y] = "O";
 
       changeTurn();
     } else {
-      boardCopy[x][y] = "🔥";
+      boardCopy[x][y] = "X";
       getWinner();
       shoot(getRandom(9), getRandom(9), myTurn);
     }
