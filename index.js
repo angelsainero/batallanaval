@@ -3,31 +3,13 @@
 let winner = false;
 let myTurn = true;
 
-const aircraftCarrier = {
-  number: 1,
-  size: 5,
-  icon: "⛴️",
-};
-const vessel = {
-  number: 1,
-  size: 4,
-  icon: "🚢",
-};
-const submarine = {
-  number: 2,
-  size: 3,
-  icon: "⚓",
-};
-const cruise = {
-  number: 3,
-  size: 2,
-  icon: "🚤",
-};
-const boat = {
-  number: 3,
-  size: 1,
-  icon: "🛶",
-};
+const boats = [
+  { name: "aircraftCarrier", quantity: 1, size: 5, icon: "⛴️" },
+  { name: "vessel", quantity: 1, size: 4, icon: "🚢" },
+  { name: "submarine", quantity: 2, size: 3, icon: "⚓" },
+  { name: "cruise", quantity: 3, size: 2, icon: "🚤" },
+  { name: "boat", quantity: 3, size: 1, icon: "🛶" },
+];
 
 let boardA = [
   [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
@@ -133,8 +115,7 @@ function insertShips(board, ship, direction) {
       }
     }
 
-    //   }
-    // }
+   
   }
 }
 
@@ -146,26 +127,12 @@ function getRandom(max) {
   return Math.floor(Math.random() * max);
 }
 
-insertShips(boardA, aircraftCarrier, getRandom(2));
-insertShips(boardA, vessel, getRandom(2));
-insertShips(boardA, submarine, getRandom(2));
-insertShips(boardA, submarine, getRandom(2));
-insertShips(boardA, cruise, getRandom(2));
-insertShips(boardA, cruise, getRandom(2));
-insertShips(boardA, cruise, getRandom(2));
-insertShips(boardA, boat, getRandom(2));
-insertShips(boardA, boat, getRandom(2));
-insertShips(boardA, boat, getRandom(2));
-insertShips(boardB, aircraftCarrier, getRandom(2));
-insertShips(boardB, vessel, getRandom(2));
-insertShips(boardB, submarine, getRandom(2));
-insertShips(boardB, submarine, getRandom(2));
-insertShips(boardB, cruise, getRandom(2));
-insertShips(boardB, cruise, getRandom(2));
-insertShips(boardB, cruise, getRandom(2));
-insertShips(boardB, boat, getRandom(2));
-insertShips(boardB, boat, getRandom(2));
-insertShips(boardB, boat, getRandom(2));
+for (let i = 0; i < boats.length; i++) {
+  for (let j = 0; j < boats[i].quantity; j++) {
+    insertShips(boardA, boats[i], getRandom(2));
+    insertShips(boardB, boats[i], getRandom(2));
+  }
+}
 
 printBoard(boardA);
 printBoard2(boardB);
