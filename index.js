@@ -1,6 +1,5 @@
 // crear título de empiece el juego
 
-let winner = false;
 let myTurn = true;
 
 const boats = [
@@ -80,41 +79,54 @@ function printBoard2(board2) {
   console.table(board2);
 }
 
-//funcion para insertar barcos  en el board (vertical y horizontal)
-function insertShips(board, ship, direction) {
-  if (direction == 1) {
-    //si es horizontal
-    let isValid = false;
-    while (!isValid) {
-      let startRow = Math.floor(Math.random() * 10);
-      let startCol = Math.floor(Math.random() * 10);
-      for (let i = startCol; i < startCol + ship.size; i++) {
-        if (startCol + ship.size < board.length && board[startRow][i] == " ") {
-          board[startRow][i] = ship.icon;
-          isValid = true;
-        } else {
-          isValid = false;
-          break;
-        }
+function canInsertShip(board, size, row, col, direction) {
+  if (direction === 0) {
+    // Si es Horizontal
+    if (row + size > board.length) {
+      return false;
+    }
+    for (var i = row; i < row + size; i++) {
+      if (board[i][col] !== " ") {
+        return false;
       }
     }
   } else {
-    //si es vertical
-    let isValid = false;
-    while (!isValid) {
-      let startRow = Math.floor(Math.random() * 10);
-      let startCol = Math.floor(Math.random() * 10);
-      for (let i = startRow; i < startRow + ship.size; i++) {
-        if (startRow + ship.size < board.length && board[i][startCol] == " ") {
-          board[i][startRow] = ship.icon;
-          isValid = true;
-        } else {
-          isValid = false;
-          break;
-        }
+    //si es Vertical
+    if (col + size > board[0].length) {
+      return false;
+    }
+    for (var i = col; i < col + size; i++) {
+      if (board[row][i] !== " ") {
+        return false;
       }
     }
   }
+  return true;
+}
+
+function placeBoats(board) {
+  boats.forEach((boat) => {
+    for (let i = 0; i < boat.quantity; i++) {
+      let row = Math.floor(Math.random() * 10);
+      let col = Math.floor(Math.random() * 10);
+      let direction = Math.floor(Math.random() * 2);
+      
+      while (!canInsertShip(board, boat.size, row, col, direction)) {
+        row = Math.floor(Math.random() * 10);
+        col = Math.floor(Math.random() * 10);
+        direction = Math.floor(Math.random() * 2);
+      }
+
+      
+      for (let j = 0; j < boat.size; j++) {
+        if (direction === 0) {
+          board[row + j][col] = boat.icon;
+        } else {
+          board[row][col + j] = boat.icon;
+        }
+      }
+    }
+  });
 }
 
 // //PINTAMOS TITULO
@@ -125,12 +137,15 @@ function getRandom(max) {
   return Math.floor(Math.random() * max);
 }
 
-for (let i = 0; i < boats.length; i++) {
-  for (let j = 0; j < boats[i].quantity; j++) {
-    insertShips(boardA, boats[i], getRandom(2));
-    insertShips(boardB, boats[i], getRandom(2));
-  }
-}
+placeBoats(boardA);
+placeBoats(boardB);
+
+// for (let i = 0; i < boats.length; i++) {
+//   for (let j = 0; j < boats[i].quantity; j++) {
+//     insertShips(boardA, boats[i], getRandom(2));
+//     insertShips(boardB, boats[i], getRandom(2));
+//   }
+// }
 
 printBoard(boardA);
 printBoard2(boardB);
@@ -145,7 +160,7 @@ let PlayerAHits = 0;
 let PlayerBHits = 0;
 
 function getWinner(board, boardCopy) {
-  if (myTurn) {    
+  if (myTurn) {
     PlayerBHits = PlayerBHits + 1;
     if (PlayerBHits === 24) {
       //aqui el 24 habría que calcularlo
@@ -215,11 +230,11 @@ function shoot(x, y) {
     (!myTurn && shootCounterB > 99) // o si no es mi turno y su contador llega a 99
   ) {
     printHeading("GAME OVER");
-      if (PlayerAHits > PlayerBHits) {
-        printHeading ("PAYER A WINS")
-      }else{
-        printHeading("PLAYER B WINS")
-      }
+    if (PlayerAHits > PlayerBHits) {
+      printHeading("PAYER A WINS");
+    } else {
+      printHeading("PLAYER B WINS");
+    }
     printBoard(board);
     printBoard2(boardCopy);
   } else {
