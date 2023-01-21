@@ -71,13 +71,13 @@ function printHeading(text) {
 }
 
 function printBoard(board) {
-  console.log("Tablero PROPIO");
-  console.table(board)
+  console.log("Own Board");
+  console.table(board);
 }
 
 function printBoard2(board2) {
-  console.log("Tablero OPONENTE");
-  console.table(board2)
+  console.log("Enemy Board");
+  console.table(board2);
 }
 
 //funcion para insertar barcos  en el board (vertical y horizontal)
@@ -114,8 +114,6 @@ function insertShips(board, ship, direction) {
         }
       }
     }
-
-   
   }
 }
 
@@ -147,7 +145,7 @@ let PlayerAHits = 0;
 let PlayerBHits = 0;
 
 function getWinner(board, boardCopy) {
-  if (myTurn) {
+  if (myTurn) {    
     PlayerBHits = PlayerBHits + 1;
     if (PlayerBHits === 24) {
       //aqui el 24 habría que calcularlo
@@ -188,11 +186,15 @@ function shoot(x, y) {
   let boardCopy; // board donde se pintará el disparo
   if (myTurn) {
     printHeading(
-      `SHOOOOOOOT PLAYER A --> turno ${shootCounterA + shootCounterB}`
+      `SHOOOOOOOT PLAYER A to ${x},${y}:--> turn ${
+        shootCounterA + shootCounterB
+      }`
     );
   } else {
     printHeading(
-      `SHOOOOOOOT PLAYER B --> turno ${shootCounterA + shootCounterB}`
+      `SHOOOOOOOT PLAYER B to ${x},${y}:--> turn ${
+        shootCounterA + shootCounterB
+      }`
     );
   }
 
@@ -213,6 +215,11 @@ function shoot(x, y) {
     (!myTurn && shootCounterB > 99) // o si no es mi turno y su contador llega a 99
   ) {
     printHeading("GAME OVER");
+      if (PlayerAHits > PlayerBHits) {
+        printHeading ("PAYER A WINS")
+      }else{
+        printHeading("PLAYER B WINS")
+      }
     printBoard(board);
     printBoard2(boardCopy);
   } else {
