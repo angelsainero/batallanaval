@@ -140,12 +140,7 @@ function getRandom(max) {
 placeBoats(boardA);
 placeBoats(boardB);
 
-// for (let i = 0; i < boats.length; i++) {
-//   for (let j = 0; j < boats[i].quantity; j++) {
-//     insertShips(boardA, boats[i], getRandom(2));
-//     insertShips(boardB, boats[i], getRandom(2));
-//   }
-// }
+
 
 printBoard(boardA);
 printBoard2(boardB);
@@ -163,8 +158,8 @@ function getWinner(board, boardCopy) {
   if (myTurn) {
     PlayerBHits = PlayerBHits + 1;
     if (PlayerBHits === 24) {
-      //aqui el 24 habría que calcularlo
-      win = true; //habría ganado el player A y aqui habría que poder decir quien ha ganado
+      
+      win = true; 
       printHeading("PLAYER A: Wins!");
       printBoard(board);
       printBoard2(boardCopy);
@@ -176,8 +171,8 @@ function getWinner(board, boardCopy) {
   if (!myTurn) {
     PlayerAHits = PlayerAHits + 1;
     if (PlayerAHits === 24) {
-      //aqui el 24 habría que calcularlo
-      win = true; //habría ganado el player B y aqui habría que poder decir quien ha ganado
+      
+      win = true; 
       printHeading("PLAYER B: Wins!");
       printBoard(board);
       printBoard2(boardCopy);
@@ -238,11 +233,13 @@ function shoot(x, y) {
     printBoard(board);
     printBoard2(boardCopy);
   } else {
+    
     if (board[x][y] == " ") {
       boardCopy[x][y] = "💧";
 
       changeTurn();
     } else {
+      
       boardCopy[x][y] = "🔥";
       getWinner(board, boardCopy);
     }
@@ -252,5 +249,16 @@ function shoot(x, y) {
 }
 
 while (win == false) {
-  shoot(getRandom(9), getRandom(9));
+
+  shoot(getRandom(10), getRandom(10));
 }
+
+function noRepeatShoot (board, boardCopy, x,y) {
+  if (boardCopy[x][y]=="🔥" ||boardCopy[x][y]=="💧") {
+  return false
+  
+}
+return true
+}
+
+//pendiente que no se superpongan los disparos 
