@@ -36,7 +36,7 @@ let boardB = [
   [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 ];
 
-let boardACopy = [
+let boardAHide = [
   [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
   [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
   [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
@@ -49,7 +49,7 @@ let boardACopy = [
   [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 ];
 
-let boardBCopy = [
+let boardBHide = [
   [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
   [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
   [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
@@ -154,7 +154,7 @@ let win = false;
 let PlayerAHits = 0;
 let PlayerBHits = 0;
 
-function getWinner(board, boardCopy) {
+function getWinner(board, boardHide) {
   if (myTurn) {
     PlayerBHits = PlayerBHits + 1;
     if (PlayerBHits === 24) {
@@ -162,7 +162,7 @@ function getWinner(board, boardCopy) {
       win = true; 
       printHeading("PLAYER A: Wins!");
       printBoard(board);
-      printBoard2(boardCopy);
+      printBoard2(boardHide);
     } else {
       shoot(getRandom(9), getRandom(9), myTurn);
     }
@@ -175,7 +175,7 @@ function getWinner(board, boardCopy) {
       win = true; 
       printHeading("PLAYER B: Wins!");
       printBoard(board);
-      printBoard2(boardCopy);
+      printBoard2(boardHide);
     } else {
       shoot(getRandom(9), getRandom(9), myTurn);
     }
@@ -193,7 +193,7 @@ function changeTurn() {
 // Crear disparar
 function shoot(x, y) {
   let board; // board al que se disparará
-  let boardCopy; // board donde se pintará el disparo
+  let boardHide; // board donde se pintará el disparo
   if (myTurn) {
     printHeading(
       `SHOOOOOOOT PLAYER A to ${x},${y}:--> turn ${
@@ -211,12 +211,12 @@ function shoot(x, y) {
   if (myTurn) {
     // si es mi turno
     board = boardB; // dispararé al boardB
-    boardCopy = boardBCopy; // pintaré en el boardBcopy
+    boardHide = boardBHide; // pintaré en el boardBcopy
     shootCounterA = shootCounterA + 1; //aumento contador de disparos de A
   } else {
     // si no es mi turno
     board = boardA; // disparará al boardA
-    boardCopy = boardACopy; // pintará en el boardAcopy
+    boardHide = boardAHide; // pintará en el boardAcopy
     shootCounterB = shootCounterB + 1; //aumento contador de disparos de B
   }
 
@@ -231,20 +231,20 @@ function shoot(x, y) {
       printHeading("PLAYER B WINS");
     }
     printBoard(board);
-    printBoard2(boardCopy);
+    printBoard2(boardHide);
   } else {
     
     if (board[x][y] == " ") {
-      boardCopy[x][y] = "💧";
+      boardHide[x][y] = "💧";
 
       changeTurn();
     } else {
       
-      boardCopy[x][y] = "🔥";
-      getWinner(board, boardCopy);
+      boardHide[x][y] = "🔥";
+      getWinner(board, boardHide);
     }
     printBoard(board);
-    printBoard2(boardCopy);
+    printBoard2(boardHide);
   }
 }
 
@@ -253,12 +253,11 @@ while (win == false) {
   shoot(getRandom(10), getRandom(10));
 }
 
-function noRepeatShoot (board, boardCopy, x,y) {
-  if (boardCopy[x][y]=="🔥" ||boardCopy[x][y]=="💧") {
+function noRepeatShoot (board, boardHide, x,y) {
+  if (boardHide[x][y]=="🔥" ||board[x][y]=="💧") {
   return false
   
 }
 return true
 }
 
-//pendiente que no se superpongan los disparos 
